@@ -34,7 +34,7 @@ st.markdown("""
         border-bottom: 2px solid #e5e7eb;
     }
 
-    /* ── Make ALL input labels dark and bold ── */
+    /* ── Input labels ── */
     .stNumberInput label,
     .stSelectbox label {
         color: #1e293b !important;
@@ -42,7 +42,7 @@ st.markdown("""
         font-weight: 600 !important;
     }
 
-    /* ── Make selectbox and number input text dark ── */
+    /* ── Input boxes ── */
     .stSelectbox div[data-baseweb="select"] > div,
     .stNumberInput input {
         color: #1e293b !important;
@@ -51,9 +51,55 @@ st.markdown("""
         border-radius: 8px !important;
     }
 
-    /* ── Dropdown option text ── */
+    /* ── Dropdown options ── */
     [data-baseweb="menu"] li {
         color: #1e293b !important;
+    }
+
+    /* ── Metric label (Model Confidence) ── */
+    [data-testid="stMetricLabel"] p {
+        color: #1e293b !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+    }
+
+    /* ── Metric value (the percentage number) ── */
+    [data-testid="stMetricValue"] {
+        color: #3b82f6 !important;
+        font-size: 36px !important;
+        font-weight: 800 !important;
+    }
+
+    /* ── Has Internet / No Internet text rows ── */
+    .conf-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+    .conf-item {
+        flex: 1;
+        text-align: center;
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .conf-yes {
+        background: #d1fae5;
+        color: #065f46;
+        margin-right: 8px;
+    }
+    .conf-no {
+        background: #fee2e2;
+        color: #991b1b;
+        margin-left: 8px;
+    }
+    .conf-item span {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        opacity: 0.75;
     }
 
     .result-yes {
@@ -201,7 +247,7 @@ if predict:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Confidence meter
+    # ── Confidence card ──────────────────────────────────────
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown('<div class="section-title">Confidence Score</div>', unsafe_allow_html=True)
 
@@ -211,10 +257,18 @@ if predict:
 
     st.progress(float(proba))
 
-    col_a, col_b = st.columns(2)
-    with col_a:
-        st.markdown(f"**Has Internet:** `{proba:.1%}`")
-    with col_b:
-        st.markdown(f"**No Internet:** `{1-proba:.1%}`")
+    # Replaced st.markdown bold/code with styled HTML blocks
+    st.markdown(f"""
+    <div class="conf-row">
+        <div class="conf-item conf-yes">
+            <span>Has Internet</span>
+            {proba:.1%}
+        </div>
+        <div class="conf-item conf-no">
+            <span>No Internet</span>
+            {1 - proba:.1%}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
