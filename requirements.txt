@@ -4,4 +4,8 @@ numpy>=1.26.0
 lightgbm>=4.0.0
 scikit-learn>=1.3.0
 joblib>=1.3.0
+<<<<<<< HEAD
 pillow>=11.0.0
+=======
+pillow>=11.0.0
+>>>>>>> 92a937827abeeea9ef2b7ee815481c036877dd51
