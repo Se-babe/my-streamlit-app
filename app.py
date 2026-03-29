@@ -153,7 +153,7 @@ threshold = joblib.load(os.path.join(BASE_DIR, "threshold.pkl"))
 # ── Header ──────────────────────────────────────────────────
 st.markdown("""
 <div style='text-align:center; padding: 12px 0 4px 0;'>
-    <h1 style='margin:0; font-size:28px; color:#1e293b;'>Internet Access Predictor</h1>
+    <h1 style='margin:0; font-size:28px; color:#1e293b;'>Internet Access Predictor Among Ugandan HouseHolds</h1>
     <p style='color:#64748b; font-size:15px; margin-top:4px;'>Uganda National and housing Census 2014 </p>
 </div>
 """, unsafe_allow_html=True)
