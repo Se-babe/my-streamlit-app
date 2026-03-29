@@ -58,12 +58,6 @@ st.markdown("""
         color: #374151;
     }
 
-    .conf-label {
-        font-size: 13px;
-        color: #6b7280;
-        margin-bottom: 4px;
-    }
-
     #MainMenu, footer { visibility: hidden; }
 
     div.stButton > button {
@@ -98,6 +92,8 @@ st.markdown("""
 
 st.markdown("<br>", unsafe_allow_html=True)
 
+yn = lambda x: "No" if x == 0 else "Yes"
+
 # ── Section 1: Demographics ─────────────────────────────────
 st.markdown('<div class="card">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Demographics</div>', unsafe_allow_html=True)
@@ -108,15 +104,16 @@ with col1:
 with col2:
     sex = st.selectbox("Sex", [1, 2], format_func=lambda x: "Male" if x == 1 else "Female")
 with col3:
-    rururb = st.selectbox("Area", [1, 2], format_func=lambda x: "Urban" if x == 1 else "Rural")
+    rururb = st.selectbox("Area type", [1, 2], format_func=lambda x: "Urban" if x == 1 else "Rural")
 
 col4, col5 = st.columns(2)
 with col4:
     grade = st.number_input("Education Grade", min_value=0, max_value=99, value=7)
 with col5:
     literacy = st.selectbox("Literacy", [1, 2, 3, 4],
-                   format_func=lambda x: {1: "Reads and Writes", 2: "Reads Only",
+                   format_func=lambda x: {1: "Reads & Writes", 2: "Reads Only",
                                           3: "Cannot Read", 4: "N/A"}[x])
+
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ── Section 2: Household Assets ─────────────────────────────
@@ -124,15 +121,14 @@ st.markdown('<div class="card">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Household Assets</div>', unsafe_allow_html=True)
 
 col1, col2, col3, col4 = st.columns(4)
-yn = lambda x: "No" if x == 0 else "Yes"
 with col1:
-    phone = st.selectbox("Phone", [0, 1], format_func=yn)
+    phone = st.selectbox("Owns Phone", [0, 1], format_func=yn)
 with col2:
-    computer = st.selectbox("Computer", [0, 1], format_func=yn)
+    computer = st.selectbox("Owns Computer", [0, 1], format_func=yn)
 with col3:
-    radio = st.selectbox("Radio", [0, 1], format_func=yn)
+    radio = st.selectbox("Owns Radio", [0, 1], format_func=yn)
 with col4:
-    television = st.selectbox("Television", [0, 1], format_func=yn)
+    television = st.selectbox("Owns Television", [0, 1], format_func=yn)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -144,16 +140,16 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     meals = st.selectbox("Meals per day", [1, 2, 3, 4, 5])
 with col2:
-    bank_account = st.selectbox("Bank Account", [0, 1], format_func=yn)
+    bank_account = st.selectbox("Has Bank Account", [0, 1], format_func=yn)
 with col3:
-    livelihood = st.number_input("Livelihood Code", min_value=0, value=10)
+    livelihood = st.number_input("Livelihood source code", min_value=0, value=10)
 with col4:
-    energysource = st.number_input("Energy Source", min_value=0, value=1)
+    energysource = st.number_input("Energy source code", min_value=0, value=1)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ── Predict Button ───────────────────────────────────────────
-predict = st.button("Predict Internet Access")
+predict = st.button("Predict")
 
 if predict:
     input_data = pd.DataFrame([[
@@ -167,14 +163,14 @@ if predict:
     st.markdown("<br>", unsafe_allow_html=True)
 
     if pred == 1:
-        st.markdown(f"""
+        st.markdown("""
         <div class="result-yes">
             <div class="result-label">Has Internet Access</div>
             <div class="result-sub">This individual is likely to have internet access.</div>
         </div>
         """, unsafe_allow_html=True)
     else:
-        st.markdown(f"""
+        st.markdown("""
         <div class="result-no">
             <div class="result-label">No Internet Access</div>
             <div class="result-sub">This individual is unlikely to have internet access.</div>
