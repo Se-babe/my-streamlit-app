@@ -34,6 +34,28 @@ st.markdown("""
         border-bottom: 2px solid #e5e7eb;
     }
 
+    /* ── Make ALL input labels dark and bold ── */
+    .stNumberInput label,
+    .stSelectbox label {
+        color: #1e293b !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+
+    /* ── Make selectbox and number input text dark ── */
+    .stSelectbox div[data-baseweb="select"] > div,
+    .stNumberInput input {
+        color: #1e293b !important;
+        background-color: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+    }
+
+    /* ── Dropdown option text ── */
+    [data-baseweb="menu"] li {
+        color: #1e293b !important;
+    }
+
     .result-yes {
         background: linear-gradient(135deg, #d1fae5, #a7f3d0);
         border-left: 6px solid #10b981;
